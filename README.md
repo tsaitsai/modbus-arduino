@@ -7,11 +7,12 @@ used in industrial automation and can be used in other areas, such as home autom
 The Modbus generally uses serial RS-232 or RS-485 as physical layer (then called Modbus Serial) and
 TCP/IP via Ethernet or WiFi (Modbus IP).
 
-In the current version the library allows the Arduino operate as a slave, supporting Modbus Serial and
-Modbus over IP. For more information about Modbus see:
+In the current version the library allows the Arduino operate as a slave, supporting Modbus Serial,
+Modbus over IP (TCP) and Modbus over UDP. For more information about Modbus see:
 
 http://pt.wikipedia.org/wiki/Modbus http://www.modbus.org/docs/Modbus_Application_Protocol_V1_1b.pdf
 http://www.modbus.org/docs/Modbus_Messaging_Implementation_Guide_V1_0b.pdf
+http://jamod.sourceforge.net/kbase/modbus_udp.html
 
 <b>Author's note (motivation and thanks):</b>
 
@@ -93,12 +94,13 @@ mb.config(&myserial, 38400);   // mb.config(mb.config(&myserial, 38400, 4) for R
 How to
 ======
 
-There are five classes corresponding to five headers that may be used:
+There are six classes corresponding to six headers that may be used:
 
 <ul>
 <li>Modbus - Base Library</li>
 <li>ModbusSerial - Modbus Serial Library (RS-232 and RS-485)</li>
 <li>ModbusIP - Modbus IP Library (standard Ethernet Shield) </li>
+<li>ModbusUDP - Modbus UDP Library (standard Ethernet Shield)</li>
 <li>ModbusIP_ENC28J60 - Modbus IP Library (for ENC28J60 chip)</li>
 <li>ModbusIP_ESP8266AT - Modbus IP Library (for ESP8266 chip with AT firmware) </li>
 </ul>
@@ -287,6 +289,11 @@ This method makes all magic, answering requests and changing the registers if ne
 mb.Ists (SWITCH_ISTS, digitalRead (switchPin));
 ```
 Finally the value of SWITCH_ISTS register changes as the state of the selected digital input.
+
+
+<h3> Modbus UDP </h3>
+
+Functions like Modbus IP, except you need to include `ModbusUDP.h` (instead of `ModbusIP.h`).
 
 
 <h3> Modbus IP(ENC28J60) </h3>

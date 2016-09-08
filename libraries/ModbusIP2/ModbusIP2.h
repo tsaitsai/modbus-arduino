@@ -11,8 +11,12 @@
 #ifndef MODBUSIP2_H
 #define MODBUSIP2_H
 
-#define MODBUSIP_PORT 	  502
-#define MODBUSIP_MAXFRAME 200
+#ifndef MODBUSIP_PORT
+  #define MODBUSIP_PORT     502
+#endif
+#ifndef MODBUSIP_MAXFRAME
+  #define MODBUSIP_MAXFRAME 200
+#endif
 
 //#define TCP_KEEP_ALIVE
 

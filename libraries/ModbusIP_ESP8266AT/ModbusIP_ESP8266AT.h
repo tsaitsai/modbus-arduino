@@ -9,9 +9,15 @@
 #ifndef MODBUSIP_ESP8266AT_H
 #define MODBUSIP_ESP8266AT_H
 
-#define MODBUSIP_PORT 	  502
-#define MODBUSIP_MAXFRAME 200
-#define MODBUSIP_TIMEOUT   10
+#ifndef MODBUSIP_PORT
+  #define MODBUSIP_PORT     502
+#endif
+#ifndef MODBUSIP_MAXFRAME
+  #define MODBUSIP_MAXFRAME 200
+#endif
+#ifndef MODBUSIP_TIMEOUT
+  #define MODBUSIP_TIMEOUT   10
+#endif
 
 class ModbusIP : public Modbus {
     private:

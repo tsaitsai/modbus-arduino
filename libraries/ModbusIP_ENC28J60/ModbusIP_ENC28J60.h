@@ -9,8 +9,12 @@
 #ifndef MODBUSIP_ENC28J60_H
 #define MODBUSIP_ENC28J60_H
 
-#define MODBUSIP_PORT 	  502
-#define MODBUSIP_MAXFRAME 200
+#ifndef MODBUSIP_PORT
+  #define MODBUSIP_PORT     502
+#endif
+#ifndef MODBUSIP_MAXFRAME
+  #define MODBUSIP_MAXFRAME 200
+#endif
 
 #define ENC28J60_CS 	10 //Default chip select pin
 //#define TCP_KEEP_ALIVE

@@ -7,8 +7,12 @@
 #ifndef MODBUS_H
 #define MODBUS_H
 
-#define MAX_REGS     32
-#define MAX_FRAME   128
+#ifndef MAX_REGS
+  #define MAX_REGS     32
+#endif
+#ifndef MAX_FRAME
+  #define MAX_FRAME   128
+#endif
 //#define USE_HOLDING_REGISTERS_ONLY
 
 typedef unsigned int u_int;

@@ -12,8 +12,12 @@
 #ifndef MODBUSUDP_H
 #define MODBUSUDP_H
 
-#define MODBUSIP_PORT 	  502
-#define MODBUSIP_MAXFRAME 200
+#ifndef MODBUSIP_PORT
+  #define MODBUSIP_PORT     502
+#endif
+#ifndef MODBUSIP_MAXFRAME
+  #define MODBUSIP_MAXFRAME 200
+#endif
 
 class ModbusUDP : public Modbus {
     private:

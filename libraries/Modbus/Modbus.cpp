@@ -510,5 +510,36 @@ void Modbus::writeMultipleCoils(byte* frame,word startreg, word numoutputs, byte
 }
 #endif
 
+ModbusMaster::ModbusMaster() {
+  _transactionId = 0;
+}
 
+void ModbusMaster::frameMBAP(word len) {
+    _MBAP[0] = _transactionId >> 8;
+    _MBAP[1] = _transactionId & 0xff;
+    _MBAP[2] = 0;
+    _MBAP[3] = 0;
+    _MBAP[4] = (len + 1) >> 8;     //_len+1 for last byte from MBAP
+    _MBAP[5] = (len + 1) & 0x00FF;
+    _MBAP[6] = 0;
 
+    _transactionId++;
+}
+
+void ModbusMaster::frameHreg(word offset, word value) {
+    _len = 5;
+    _frame[0] = MB_FC_WRITE_REG;
+    _frame[1] = offset >> 8;
+    _frame[2] = offset & 0xff;
+    _frame[3] = value >> 8;
+    _frame[4] = value & 0xff;
+}
+
+void ModbusMaster::frameCoil(word offset, bool value) {
+    _len = 5;
+    _frame[0] = MB_FC_WRITE_COIL;
+    _frame[1] = offset >> 8;
+    _frame[2] = offset & 0xff;
+    _frame[3] = value ? 0xff : 0x00;
+    _frame[4] = 0;
+}

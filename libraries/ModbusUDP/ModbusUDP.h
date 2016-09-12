@@ -13,10 +13,13 @@
 #define MODBUSUDP_H
 
 #ifndef MODBUSIP_PORT
-  #define MODBUSIP_PORT     502
+  #define MODBUSIP_PORT          502
+#endif
+#ifndef MODBUSIP_MASTER_PORT
+  #define MODBUSIP_MASTER_PORT 10502
 #endif
 #ifndef MODBUSIP_MAXFRAME
-  #define MODBUSIP_MAXFRAME 200
+  #define MODBUSIP_MAXFRAME      200
 #endif
 
 class ModbusUDP : public Modbus {
@@ -32,6 +35,25 @@ class ModbusUDP : public Modbus {
         void config(uint8_t *mac, IPAddress ip, IPAddress dns, IPAddress gateway);
         void config(uint8_t *mac, IPAddress ip, IPAddress dns, IPAddress gateway, IPAddress subnet);
         void task();
+};
+
+class ModbusMasterUDP : public ModbusMaster {
+    private:
+        EthernetUDP _master;
+        void send(IPAddress ip);
+
+    public:
+        ModbusMasterUDP();
+
+        inline void sendHreg(IPAddress ip, word offset, word value) {
+            frameHreg(offset, value);
+            send(ip);
+        }
+
+        inline void sendCoil(IPAddress ip, word offset, bool value) {
+            frameCoil(offset, value);
+            send(ip);
+        }
 };
 
 #endif /* MODBUSUDP_H */

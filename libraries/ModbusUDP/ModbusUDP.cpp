@@ -61,3 +61,14 @@ void ModbusUDP::task() {
         _len = 0;
     }
 }
+
+ModbusMasterUDP::ModbusMasterUDP() {
+  _master.begin(MODBUSIP_MASTER_PORT);
+}
+
+void ModbusMasterUDP::send(IPAddress ip) {
+    frameMBAP(_len);
+    _master.beginPacket(ip, MODBUSIP_PORT);
+    _master.write(_mbap, 7 + _len);
+    _master.endPacket();
+}

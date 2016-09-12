@@ -83,3 +83,13 @@ void ModbusIP::task() {
         }
     }
 }
+
+void ModbusMasterIP::send(IPAddress ip) {
+    frameMBAP(_len);
+    if (_client.connect(ip, MODBUSIP_PORT)) {
+        _client.write(_MBAP, 7 + _len);
+        #ifndef TCP_KEEP_ALIVE
+        _client.stop();
+        #endif
+    }
+}

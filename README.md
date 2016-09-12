@@ -8,7 +8,8 @@ The Modbus generally uses serial RS-232 or RS-485 as physical layer (then called
 TCP/IP via Ethernet or WiFi (Modbus IP).
 
 In the current version the library allows the Arduino operate as a slave, supporting Modbus Serial,
-Modbus over IP (TCP) and Modbus over UDP. For more information about Modbus see:
+Modbus over IP (TCP) and Modbus over UDP. For the latter two, basic master functionality is also present.
+For more information about Modbus see:
 
 * [Modbus on Wikipedia](http://en.wikipedia.org/wiki/Modbus)
 * [Modbus application protocol (v1.1b)](http://www.modbus.org/docs/Modbus_Application_Protocol_V1_1b.pdf)
@@ -27,7 +28,7 @@ in other similar libraries.
 Features
 --------
 
-* Operates as a slave (master mode in development)
+* Operates as a slave (with basic support for master)
 * Supports Modbus Serial (RS-232 or RS485), Modbus IP (TCP) and Modbus UDP
 * Reply exception messages for all supported functions
 * Modbus functions supported:
@@ -35,8 +36,8 @@ Features
   * 0x02 - Read Input Status (Read Discrete Inputs)
   * 0x03 - Read Holding Registers
   * 0x04 - Read Input Registers
-  * 0x05 - Write Single Coil
-  * 0x06 - Write Single Register
+  * 0x05 - Write Single Coil (also master)
+  * 0x06 - Write Single Register (also master)
   * 0x0F - Write Multiple Coils
   * 0x10 - Write Multiple Registers
 
@@ -101,10 +102,10 @@ There are six classes corresponding to six headers that may be used:
 
 * `Modbus` - Base Library
 * `ModbusSerial` - Modbus Serial Library (RS-232 and RS-485)
-* `ModbusIP` - Modbus IP Library (standard Ethernet Shield)
-* `ModbusUDP` - Modbus UDP Library (standard Ethernet Shield)
-* `ModbusIP2` - Modbus IP Library (standard Ethernet 2 Shield)
-* `ModbusUDP2` - Modbus UDP Library (standard Ethernet 2 Shield)
+* `ModbusIP` - Modbus IP Library (standard Ethernet Shield) (basic master support)
+* `ModbusUDP` - Modbus UDP Library (standard Ethernet Shield) (basic master support)
+* `ModbusIP2` - Modbus IP Library (standard Ethernet 2 Shield) (basic master support)
+* `ModbusUDP2` - Modbus UDP Library (standard Ethernet 2 Shield) (basic master support)
 * `ModbusIP_ENC28J60` - Modbus IP Library (for ENC28J60 chip)
 * `ModbusIP_ESP8266AT` - Modbus IP Library (for ESP8266 chip with AT firmware)
 
@@ -306,6 +307,11 @@ mb.Ists (SWITCH_ISTS, digitalRead (switchPin));
 ```
 Finally the value of SWITCH_ISTS register changes as the state of the selected
 digital input.
+
+Modbus IP can also be a master. Sending single Hreg and Coil commands to other
+devices is possible using the `ModbusMasterIP` class (responses are not handled,
+though). Please see the
+[RemoteBlink](libraries/ModbusIP/examples/RemoteBlink/RemoteBlink.ino) example.
 
 
 ### Modbus UDP

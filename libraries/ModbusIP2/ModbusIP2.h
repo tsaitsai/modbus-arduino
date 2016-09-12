@@ -12,10 +12,10 @@
 #define MODBUSIP2_H
 
 #ifndef MODBUSIP_PORT
-  #define MODBUSIP_PORT     502
+  #define MODBUSIP_PORT          502
 #endif
 #ifndef MODBUSIP_MAXFRAME
-  #define MODBUSIP_MAXFRAME 200
+  #define MODBUSIP_MAXFRAME      200
 #endif
 
 //#define TCP_KEEP_ALIVE
@@ -35,5 +35,21 @@ class ModbusIP : public Modbus {
         void task();
 };
 
-#endif //MODBUSIP2_H
+class ModbusMasterIP : public ModbusMaster {
+    private:
+        EthernetClient _client;
+        void send(IPAddress ip);
 
+    public:
+        inline void sendHreg(IPAddress ip, word offset, word value) {
+            frameHreg(offset, value);
+            send(ip);
+        }
+
+        inline void sendCoil(IPAddress ip, word offset, bool value) {
+            frameCoil(offset, value);
+            send(ip);
+        }
+};
+
+#endif //MODBUSIP2_H

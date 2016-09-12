@@ -101,4 +101,21 @@ class Modbus {
         #endif
 };
 
+class ModbusMaster {
+    private:
+        word _transactionId;
+
+    protected:
+        byte _MBAP[7];
+        byte _frame[5];
+        byte _len;
+
+        void frameMBAP(word len);
+        void frameHreg(word offset, word value);
+        void frameCoil(word offset, bool value);
+
+    public:
+        ModbusMaster();
+};
+
 #endif //MODBUS_H

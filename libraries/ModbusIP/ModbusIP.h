@@ -40,6 +40,8 @@ class ModbusMasterIP : public ModbusMaster {
         void send(IPAddress ip);
 
     public:
+        void config() {} /* no config required */
+
         inline void sendHreg(IPAddress ip, word offset, word value) {
             frameHreg(offset, value);
             send(ip);

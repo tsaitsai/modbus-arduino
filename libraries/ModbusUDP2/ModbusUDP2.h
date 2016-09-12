@@ -42,7 +42,7 @@ class ModbusMasterUDP : public ModbusMaster {
         void send(IPAddress ip);
 
     public:
-        ModbusMasterUDP();
+        void config();
 
         inline void sendHreg(IPAddress ip, word offset, word value) {
             frameHreg(offset, value);

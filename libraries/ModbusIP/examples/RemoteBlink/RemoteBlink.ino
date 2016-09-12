@@ -10,23 +10,25 @@
 */
  
 #include <SPI.h>
-#include <Ethernet.h>
+#include <Ethernet2.h>
 #include <Modbus.h>
-#include <ModbusIP.h>
+#include <ModbusUDP2.h>
 
-// ip address we're going to send to
-byte dst[] = { 192, 168, 1, 220 };
+// IP address we're going to send to
+byte dst[] = { 192, 168, 1, 177 };
 // coil we're going to switch on and off
 const int LAMP_COIL = 100; 
 
-ModbusMasterIP mbm;
+ModbusMasterUDP mbm;
 
 void setup() {
     // Ethernet address of this shield
     byte mac[] = { 0xDE, 0xAD, 0xBE, 0xEF, 0xFE, 0xEE };
     // IP address for this shield
-    byte ip[] = { 192, 168, 1, 221 };
+    byte ip[] = { 192, 168, 1, 178 };
     Ethernet.begin(mac, ip);
+    // Get the Modbus master ready
+    mbm.config();
 }
 
 void loop() {

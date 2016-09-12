@@ -62,13 +62,13 @@ void ModbusUDP::task() {
     }
 }
 
-ModbusMasterUDP::ModbusMasterUDP() {
-  _master.begin(MODBUSIP_MASTER_PORT);
+void ModbusMasterUDP::config() {
+    _master.begin(MODBUSIP_MASTER_PORT);
 }
 
 void ModbusMasterUDP::send(IPAddress ip) {
     frameMBAP(_len);
     _master.beginPacket(ip, MODBUSIP_PORT);
-    _master.write(_mbap, 7 + _len);
+    _master.write(_MBAP, 7 + _len);
     _master.endPacket();
 }

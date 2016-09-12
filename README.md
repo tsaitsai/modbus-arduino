@@ -518,10 +518,11 @@ wifiSerial.println("AT+CWDHCP=1,1");
 Other Modbus libraries
 ======================
 
-**Arduino Modbus RTU**<br>
+**Modbus Arduino**<br>
 Author: Andre Sarmento<br>
 Year: 2015<br>
-Website: https://github.com/andresarmento/modbus-arduino
+Website: https://github.com/andresarmento/modbus-arduino<br>
+_(the library this project is based on)_<br>
 
 **Arduino Modbus RTU**<br>
 Author: Juan Pablo Zometa, Samuel and Marco Andras Tucsni<br>
